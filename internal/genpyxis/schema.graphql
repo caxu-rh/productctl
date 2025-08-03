@@ -1088,6 +1088,14 @@ type ContainerRepository {
   """Marketplace related information."""
   marketplace: ContainerRepositoryMarketplace
 
+  """Catalog Visibility."""
+  catalog_visibility: String
+
+  """
+  Red Hat Org ID / account_id from Red Hat SSO. Also corresponds to company_org_id in Red Hat Connect.
+  """
+  org_id: Int
+
   """MongoDB unique _id"""
   _id: ObjectID
 
@@ -1700,6 +1708,9 @@ type CertificationProject {
   """Certification project type."""
   type: String
 
+  """Catalog Visibility."""
+  catalog_visibility: String
+
   """MongoDB unique _id"""
   _id: ObjectID
 
@@ -2155,6 +2166,11 @@ type ProductListing {
   published: Boolean
 
   """
+  This field is related to store initial publish date for product listing.
+  """
+  initial_publish_date: DateTime
+
+  """
   Flag determining if product listing is considered to be deleted. Product listing can be deleted only if it is not published. Value is set to False by default.
   """
   deleted: Boolean
@@ -2481,6 +2497,7 @@ input CertificationProjectFilter {
   badges_size: IntFilter
   badges: StringListFilter
   type: StringFilter
+  catalog_visibility: StringFilter
   _id: ObjectIDFilter
   creation_date: DateTimeFilter
   last_update_date: DateTimeFilter
@@ -2962,6 +2979,7 @@ input ProductListingFilter {
   name: StringFilter
   published_history: FieldHistoryBooleanFilter
   published: BooleanFilter
+  initial_publish_date: DateTimeFilter
   deleted: BooleanFilter
   quick_start_configuration: QuickStartConfigurationFilter
   repositories_size: IntFilter
@@ -3579,6 +3597,8 @@ input ContainerRepositoryFilter {
   use_latest: BooleanFilter
   vendor_label: StringFilter
   marketplace: ContainerRepositoryMarketplaceFilter
+  catalog_visibility: StringFilter
+  org_id: IntFilter
   _id: ObjectIDFilter
   creation_date: DateTimeFilter
   last_update_date: DateTimeFilter
@@ -5812,6 +5832,14 @@ type ContainerRepositoryFederated {
   """List of products that are part of the product listing."""
   products: [Product]
 
+  """Catalog Visibility."""
+  catalog_visibility: String
+
+  """
+  Red Hat Org ID / account_id from Red Hat SSO. Also corresponds to company_org_id in Red Hat Connect.
+  """
+  org_id: Int
+
   """MongoDB unique _id"""
   _id: ObjectID
 
@@ -5924,6 +5952,11 @@ type ProductListingFederated {
 
   """This field is required when the product listing is published."""
   published: Boolean
+
+  """
+  This field is related to store initial publish date for product listing.
+  """
+  initial_publish_date: DateTime
 
   """
   Flag determining if product listing is considered to be deleted. Product listing can be deleted only if it is not published. Value is set to False by default.
@@ -6910,6 +6943,9 @@ input CertificationProjectInput {
   """Certification project type."""
   type: String
 
+  """Catalog Visibility."""
+  catalog_visibility: String
+
   """MongoDB unique _id"""
   _id: ObjectID
 
@@ -7209,6 +7245,11 @@ input ProductListingInput {
 
   """This field is required when the product listing is published."""
   published: Boolean
+
+  """
+  This field is related to store initial publish date for product listing.
+  """
+  initial_publish_date: DateTime
 
   """
   Flag determining if product listing is considered to be deleted. Product listing can be deleted only if it is not published. Value is set to False by default.
